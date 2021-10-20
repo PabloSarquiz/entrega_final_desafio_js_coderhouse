@@ -1,3 +1,5 @@
+/*
+
 // Esta es la clase constructoria de los libros
 class Libro {
     constructor(autor, titulo, año, editorial, stock, precio) {
@@ -166,7 +168,40 @@ main();
 
 
 
+*/
 
+
+// Seleccionar todos los botones Add to cart y agregar eventListener.
+
+let botonesAddToCart = document.getElementsByClassName("btn-primary");
+
+for (let i = 0; i < botonesAddToCart.length; i++){
+    let boton = botonesAddToCart[i]
+    boton.addEventListener('click', function() {
+        console.log("clicked");
+    })
+};
+
+// ------------------------------------------------------------------------------
+
+// seleccionr boton comprar y agregar eventListener
+
+let botonComprar = document.getElementById("buy");
+
+botonComprar.addEventListener('click', function() {
+    console.log("clicked");
+});
+
+//------------------------------------------------------------------------------
+
+// seleccionar boton limpiar y agregar event listener
+
+let botonLimpiar = document.getElementById("clear");
+botonLimpiar.addEventListener('click', function(){
+    console.log("clicked")
+});
+
+//---------------------------------------------------------------------------------
 
 
 
