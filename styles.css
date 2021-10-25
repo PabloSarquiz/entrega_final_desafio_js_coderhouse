@@ -13,6 +13,7 @@ h1{
 h2 {
     color: whitesmoke;
     font-family: 'IM Fell English SC', serif;
+    padding-top: 25px;
 }
 
 img {
@@ -33,12 +34,12 @@ p {
 
 .contenedor{
     background: url(./ASSETS/halloween.jpg) no-repeat;
-    background-size: 100%S;
+    background-size: 100%s;
     display: grid;
     grid:
-    'header header  header  header  header  header' 
-    'uno     dos    tres    cuatro  carrito carrito'
-    'cinco   seis   siete   ocho    carrito carrito'
+    'header header  header  header  carrito carrito' 
+    'uno     dos    tres    cuatro  carrito carrito '
+    'cinco   seis   siete   ocho    carrito carrito '
     ;
   
 }
@@ -124,17 +125,41 @@ p {
 .carrito {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: space-evenly;
     grid-area: carrito;
     height: 100vh;
+    background-color: rgba(24, 22, 22, 0.795);
    
     
 }
 
+.cantidad {
+    width: 40px;
+}
+
+.producto-carrito {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .carrito img {
     width: 10%;
+    justify-content: flex-start;
+    align-content: flex-start;
     align-self: flex-start;
+}
+
+.total {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.botones {
+    display: flex;
+    justify-content: space-around;
 }
 
 

@@ -71,10 +71,19 @@ let botonesAddToCart = document.getElementsByClassName("btn-primary");
 
 for (let i = 0; i < botonesAddToCart.length; i++) {
     let boton = botonesAddToCart[i]
-    boton.addEventListener('click', function () {
-        console.log("clicked");
-    })
+    boton.addEventListener('click', () => {
+        console.log("funciona")
+    }
+        
+    )
 };
+
+
+
+
+
+
+
 
 // ------------------------------------------------------------------------------
 
@@ -83,17 +92,34 @@ for (let i = 0; i < botonesAddToCart.length; i++) {
 let botonComprar = document.getElementById("buy");
 
 botonComprar.addEventListener('click', function () {
-    console.log("clicked");
+    console.log("Compra");
 });
 
 //------------------------------------------------------------------------------
 
-// seleccionar boton limpiar y agregar event listener
+// seleccionar boton delete y agregar event listener
 
-let botonLimpiar = document.getElementById("clear");
-botonLimpiar.addEventListener('click', function () {
-    console.log("clicked")
+let botonesDelete = document.getElementsByClassName("delete");
+for (let i = 0; i < botonesDelete.length; i++) {
+    let botonDelete = botonesDelete[i]
+    botonDelete.addEventListener('click', function (event) {
+        let botonDeleteApretado = event.target
+        botonDeleteApretado.parentElement.remove()
+    })
+};
+
+// selecionar Boton Clear y agregar event listener 
+
+let botonClear = document.getElementById("clear");
+
+botonClear.addEventListener('click', () => {
+   
+    botonClear.parentElement.parentElement.remove();
+
 });
 
-//---------------------------------------------------------------------------------
+
+
+
+
 
