@@ -132,6 +132,11 @@ p {
     
 }
 
+.carrito img {
+    width: 10%;
+    align-self: flex-start;
+}
+
 
 .zoom {
     -webkit-transition: -webkit-transform .5s;
@@ -147,7 +152,7 @@ p {
 
 
 
-@media  (max-width: 1600px) {
+@media  (max-width: 1200px) {
 
     .contenedor{
 
@@ -162,9 +167,19 @@ p {
         ;
       
     }
-    
-    
+
+    .carrito {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
+    
+    .carrito img {
+       
+        width: 15%;
+    }
+       
 
     h2 {
         margin-top: 10px;
@@ -179,6 +194,12 @@ p {
     }
 
 
+    
+    }
+
+  
+
+    
 
 
 @media  (max-width: 680px) {

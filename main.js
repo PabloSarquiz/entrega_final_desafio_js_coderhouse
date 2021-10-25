@@ -1,183 +1,77 @@
-/*
+// Esta es la clase constructora del carrito
+
+class Carrito {
+    constructor(name = "Usuario", items = [], total = 0) {
+        this.name = name,
+            this.items = items,
+            this.total = total
+    }
+
+    addLibro(libro) {
+        if (libro.getStock() === true) {
+
+        }
+    }
+
+
+}
 
 // Esta es la clase constructoria de los libros
 class Libro {
-    constructor(autor, titulo, año, editorial, stock, precio) {
+    constructor(id, autor, titulo, año, editorial, stock, precio) {
+        this.id = id
         this.autor = autor,
-            this.titulo = titulo,
-            this.año = año,
-            this.editorial = editorial,
-            this.stock = stock
+        this.titulo = titulo,
+        this.año = año,
+        this.editorial = editorial,
+        this.stock = stock
         this.precio = precio
+    }
+
+    getStock() {
+        if (this.stock > 0) {
+            this.stock--;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
-let libroUno = new Libro("KING", "CARRIE", 1974, "DEBOLSILLO", 4, 899);
-let libroDos = new Libro("KING", "CUJO", 1976, "DEBOLSILLO", 9, 999);
-let libroTres = new Libro("KING", "SALEM'S LOT", 1988, "DEBOLSILLO", 8, 899);
-let libroCuatro = new Libro("KING", "IT", 1986, "DEBOLSILLO", 10, 1199);
-let libroCinco = new Libro("KING", "CEMENTERIO DE ANIMALES", 1999, "SALAMANDRA", 5, 899);
-let libroSeis = new Libro("KING", "THE STAND", 1974, "SALAMANDRA", 3, 999);
-let libroSiete = new Libro("KING", "EL RESPLANDOR", 1984, "DEBOLSILLO", 0, 999);
-let libroOcho = new Libro("KING", "MISERY", 1984, "DEBOLSILLO", 3, 999);
 
+let baseDatos = [];
 
-let biblioteca = [];
+baseDatos.push(new Libro(1, "KING", "CARRIE", 1974, "DEBOLSILLO", 4, 899));
+baseDatos.push(new Libro(2, "KING", "CUJO", 1976, "DEBOLSILLO", 9, 999));
+baseDatos.push(new Libro(3, "KING", "SALEM'S LOT", 1988, "DEBOLSILLO", 8, 899));
+baseDatos.push(new Libro(4, "KING", "IT", 1986, "DEBOLSILLO", 10, 1199));
+baseDatos.push(new Libro(5, "KING", "CEMENTERIO DE ANIMALES", 1999, "SALAMANDRA", 5, 899));
+baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 999));
+baseDatos.push(new Libro(7, "KING", "EL RESPLANDOR", 1984, "DEBOLSILLO", 0, 999));
+baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999));
 
-biblioteca.push(libroUno, libroDos, libroTres, libroCuatro, libroCinco, libroSeis, libroSiete);
+console.log(baseDatos);
 
-let carrito = [];
-let total = 0;
+console.log(baseDatos[0].getStock());
+console.log(baseDatos[6].getStock());
 
+console.log(baseDatos);
 
-function main() {
-    alert("Bienvenido a nuestra tienda virtual! A continuacion sellecione el numero del libro que desea comprar")
-    let opcion = mostrarProductos();
+console.log(Object.keys(baseDatos[0]));
 
-    while (opcion != 0) {
-        switch (opcion) {
-            case 1:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    opcion = mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-
-            case 2:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-
-            case 3:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-            case 4:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-
-            case 5:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-
-            case 6:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-            case 7:
-                if (biblioteca[opcion - 1].stock <= 0) {
-                    alert("Lo sentimos, ya no hay stock")
-                    mostrarProductos();
-                } else {
-                    alert(`agregaste ${biblioteca[opcion - 1].titulo} al carrito`);
-                    biblioteca[opcion - 1].stock--
-                    agregarLibro(biblioteca[opcion - 1]);
-
-                }
-                break
-
-            default:
-                alert("Ingresaste una opcion invalida");
-
-        };
-
-        opcion = mostrarProductos();
-    };
-
-    alert("Muchas gracias por su interes en nuestros libros, a continuacion aprete F12 para ver sus productos seleccionados")
-    console.log("Estos son los productos en su carrito!")
-    console.table(carrito);
-    totalCarrito()
-    console.log(`La suma total de su carrito es ${total}`)
-};
-
-
-// Esta funcion agrega el libro al carrito
-
-function agregarLibro(libro) {
-    carrito.push(libro)
-}
-
-// Esta funcion muestra los libros disponibles
-
-function mostrarProductos() {
-    let opcion = parseInt(prompt("Seleccione el libro, presiones 0 para salir\n\n 1-Carrie \n\n 2 Cujo \n\n 3-Salem's Lot\n\n 4-IT \n\n 5-Cementerio de Animales\n\n 6-The Stand\n\n 7-El resplandor \n\n 8-Missery"));
-    return opcion;
-};
-
-// esta funcion calcula el precio total del carrito
-
-function totalCarrito() {
-    carrito.forEach(libro => {
-        total += libro.precio;
-    })
-}
-
-// esta funcion remueve todos los elementos del carrito y deja el total en 0
-
-function limpiarCarrito() {
-    total = 0
-    return carrito = [];
-}
-
-// esta es la funcion principal que ejecuta el codigo.
-
-main();
+console.log(Object.getOwnPropertyNames(baseDatos[1]));
 
 
 
-*/
 
 
 // Seleccionar todos los botones Add to cart y agregar eventListener.
 
 let botonesAddToCart = document.getElementsByClassName("btn-primary");
 
-for (let i = 0; i < botonesAddToCart.length; i++){
+for (let i = 0; i < botonesAddToCart.length; i++) {
     let boton = botonesAddToCart[i]
-    boton.addEventListener('click', function() {
+    boton.addEventListener('click', function () {
         console.log("clicked");
     })
 };
@@ -188,7 +82,7 @@ for (let i = 0; i < botonesAddToCart.length; i++){
 
 let botonComprar = document.getElementById("buy");
 
-botonComprar.addEventListener('click', function() {
+botonComprar.addEventListener('click', function () {
     console.log("clicked");
 });
 
@@ -197,11 +91,9 @@ botonComprar.addEventListener('click', function() {
 // seleccionar boton limpiar y agregar event listener
 
 let botonLimpiar = document.getElementById("clear");
-botonLimpiar.addEventListener('click', function(){
+botonLimpiar.addEventListener('click', function () {
     console.log("clicked")
 });
 
 //---------------------------------------------------------------------------------
-
-
 
