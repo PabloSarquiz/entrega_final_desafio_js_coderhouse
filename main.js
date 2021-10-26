@@ -42,13 +42,13 @@ class Libro {
 
 let baseDatos = [];
 
-baseDatos.push(new Libro(1, "KING", "CARRIE", 1974, "DEBOLSILLO", 4, 899));
-baseDatos.push(new Libro(2, "KING", "CUJO", 1976, "DEBOLSILLO", 9, 999));
-baseDatos.push(new Libro(3, "KING", "SALEM'S LOT", 1988, "DEBOLSILLO", 8, 899));
-baseDatos.push(new Libro(4, "KING", "IT", 1986, "DEBOLSILLO", 10, 1199));
-baseDatos.push(new Libro(5, "KING", "CEMENTERIO DE ANIMALES", 1999, "SALAMANDRA", 5, 899));
-baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 999));
-baseDatos.push(new Libro(7, "KING", "EL RESPLANDOR", 1984, "DEBOLSILLO", 0, 999));
+baseDatos.push(new Libro(1, "KING", "CARRIE", 1974, "DEBOLSILLO", 4, 999));
+baseDatos.push(new Libro(2, "KING", "CUJO", 1976, "DEBOLSILLO", 9, 899));
+baseDatos.push(new Libro(3, "KING", "SALEM'S LOT", 1988, "DEBOLSILLO", 8, 1100));
+baseDatos.push(new Libro(4, "KING", "IT", 1986, "DEBOLSILLO", 10, 1899));
+baseDatos.push(new Libro(5, "KING", "PET SAMATARY", 1999, "SALAMANDRA", 5, 999));
+baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 1499));
+baseDatos.push(new Libro(7, "KING", "THE SHINNING", 1984, "DEBOLSILLO", 0, 1299));
 baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999));
 
 
