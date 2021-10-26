@@ -52,7 +52,11 @@ baseDatos.push(new Libro(7, "KING", "EL RESPLANDOR", 1984, "DEBOLSILLO", 0, 999)
 baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999));
 
 
-
+// Esta funcion, selecciona primero el elemento padre de el boton que 
+// ejecuta el evento, una vez dentro del elemento padre, busca dentro
+// del mismo el titulo, el precio y la imagen y lo asigna a una variable.
+// Esta funcion se ejecuta dentro del eventListener de los botones
+// addToCart.
 
 function addToCartClicked(event){
     let boton = event.target
@@ -63,6 +67,10 @@ function addToCartClicked(event){
     console.log(titulo, precio, imagenSrc);
 
 }
+
+// Esta funcion itera por cada producto dentro del carrito. 
+// selecciona el precio de cada libro y lo multiplica por la cantidad
+// suma todos los valores y actualiza el Total.
 
 function actualizarTotalCarrito(){
     let contenedorProductoCarrito = document.getElementsByClassName("carrito")[0];
@@ -79,7 +87,7 @@ function actualizarTotalCarrito(){
 
     }
 
-    document.getElementsByClassName("total")[0].innerText = `TOTAL: ${total}`;
+    document.getElementsByClassName("total")[0].innerText = `TOTAL: $${total}`;
 }
 
 
