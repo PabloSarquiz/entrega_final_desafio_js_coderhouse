@@ -1,14 +1,15 @@
 // Esta es la clase constructora del carrito
 
 class Carrito {
-    constructor(name = "Usuario", items = [], total = 0) {
+    constructor(name, items, total) {
         this.name = name,
-            this.items = items,
-            this.total = total
+        this.items = items,
+        this.total = total
     }
 
     addLibro(libro) {
         if (libro.getStock() === true) {
+
 
         }
     }
@@ -50,17 +51,36 @@ baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 999));
 baseDatos.push(new Libro(7, "KING", "EL RESPLANDOR", 1984, "DEBOLSILLO", 0, 999));
 baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999));
 
-console.log(baseDatos);
 
-console.log(baseDatos[0].getStock());
-console.log(baseDatos[6].getStock());
 
-console.log(baseDatos);
 
-console.log(Object.keys(baseDatos[0]));
+function addToCartClicked(event){
+    let boton = event.target
+    let productoCarrito = boton.parentElement
+    let titulo = productoCarrito.getElementsByClassName("titulo")[0].innerText
+    let precio = productoCarrito.getElementsByClassName("precio")[0].innerText
+    let imagenSrc = productoCarrito.getElementsByClassName("imagen")[0].src
+    console.log(titulo, precio, imagenSrc);
 
-console.log(Object.getOwnPropertyNames(baseDatos[1]));
+}
 
+function actualizarTotalCarrito(){
+    let contenedorProductoCarrito = document.getElementsByClassName("carrito")[0];
+    let productosCarrito = contenedorProductoCarrito.getElementsByClassName("producto-carrito")
+    let total = 0
+
+    for ( let i = 0 ; i < productosCarrito.length ; i++) {
+        let productoCarrito = productosCarrito[i];
+        let precioLibro = productoCarrito.getElementsByClassName("precio")[0]
+        let cantidadLibro = productoCarrito.getElementsByClassName("cantidad")[0]
+        let precio = parseFloat(precioLibro.innerText.replace('$', ''));
+        let cantidad = cantidadLibro.value
+        total += (precio * cantidad)
+
+    }
+
+    document.getElementsByClassName("total")[0].innerText = `TOTAL: ${total}`;
+}
 
 
 
@@ -71,12 +91,12 @@ let botonesAddToCart = document.getElementsByClassName("btn-primary");
 
 for (let i = 0; i < botonesAddToCart.length; i++) {
     let boton = botonesAddToCart[i]
-    boton.addEventListener('click', () => {
-        console.log("funciona")
-    }
+    boton.addEventListener('click', addToCartClicked) 
         
-    )
-};
+    };
+        
+    
+
 
 
 
@@ -105,6 +125,7 @@ for (let i = 0; i < botonesDelete.length; i++) {
     botonDelete.addEventListener('click', function (event) {
         let botonDeleteApretado = event.target
         botonDeleteApretado.parentElement.remove()
+        actualizarTotalCarrito();
     })
 };
 
@@ -121,5 +142,5 @@ botonClear.addEventListener('click', () => {
 
 
 
-
+actualizarTotalCarrito();
 

@@ -187,17 +187,21 @@ p {
         'uno     dos  '  
         'tres    cuatro'  
         'cinco   seis '  
-        'siete   ocho '   
-        'carrito carrito'
+        'siete   ocho ' 
+        'carrito carrito'  
+       
+        
         ;
       
     }
 
     .carrito {
+
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        
     }
     
     .carrito img {
