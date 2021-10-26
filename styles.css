@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
 }
 h1{
     color: whitesmoke;
@@ -188,10 +188,9 @@ p {
         'tres    cuatro'  
         'cinco   seis '  
         'siete   ocho ' 
-        'carrito carrito'  
-       
-        
-        ;
+        'carrito carrito'
+        'carrito carrito'
+        'carrito carrito';
       
     }
 
@@ -201,10 +200,12 @@ p {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding-top: 150px;
+        margin-top: 150px;
         background-color: rgba(24, 22, 22, 0.795);
         
     }
+
+   
     
     .carrito img {
        
@@ -247,6 +248,7 @@ p {
     .carrito{
         padding-top: 150px;
         margin-top: 150px;
+        height: auto;
     }
     
     h1 {
