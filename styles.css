@@ -51,75 +51,58 @@ p {
     text-align: center;
 }
 
-.libro1{
+
+#libro1{
     grid-area: uno;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+ 
     
 }
-.libro2{
+#libro2{
     grid-area: dos;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+   
    
 }
 
-.libro3{
+#libro3{
     grid-area: tres;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+   
     
 }
 
-.libro4{
+#libro4{
     grid-area: cuatro;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
     
 
 }
-.libro5{
+#libro5{
     grid-area: cinco;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  
     
 
 }
 
-.libro6{
+#libro6{
     grid-area: seis;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+ 
     
 }
 
-.libro7{
+#libro7{
     grid-area: siete;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
    
 }
-.libro8{
+#libro8{
     grid-area: ocho;
+
+}
+
+.libro{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
 .carrito {
