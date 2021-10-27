@@ -54,48 +54,34 @@ p {
 
 #libro1{
     grid-area: uno;
- 
-    
-}
+ }
+
 #libro2{
     grid-area: dos;
-   
-   
 }
 
 #libro3{
     grid-area: tres;
-   
-    
 }
 
 #libro4{
     grid-area: cuatro;
-
-    
-
 }
+
 #libro5{
     grid-area: cinco;
-  
-    
-
 }
 
 #libro6{
     grid-area: seis;
- 
-    
 }
 
 #libro7{
     grid-area: siete;
-
-   
 }
+
 #libro8{
     grid-area: ocho;
-
 }
 
 .libro{
