@@ -52,11 +52,15 @@ baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 1499, ".
 baseDatos.push(new Libro(7, "KING", "THE SHINNING", 1984, "DEBOLSILLO", 0, 1299, "./ASSETS/elResplandor.jpg"));
 baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999, "./ASSETS/missery.jpg"));
 
+
+
+
+
+// Aqui, selecciono todos los elementos del documento con la clase .libro y se los asigno a la variable items.
+
 let items = document.querySelectorAll(".libro")
 
-
-
-// Este Loop toma la informacion "titulo" "precio" "src" y la asigna a cada libro creado.
+// Este Loop itera por cada objeto dentro del array "baseDatos" y extrae los valores de las propiedades : titulo / src / precio. Luego asigna dichas propiedades a cada  selector con la clase .libro, siendo el primer hijo titulo, el segundo src y el tecero precio.
 
 for (let i = 0; i < baseDatos.length; i++) {
     items[i].children[0].textContent = baseDatos[i].titulo
@@ -74,7 +78,7 @@ for (let i = 0; i < baseDatos.length; i++) {
 // ejecuta el evento, una vez dentro del elemento padre, busca dentro
 // del mismo el titulo, el precio y la imagen y lo asigna a una variable.
 // Esta funcion se ejecuta dentro del eventListener de los botones
-// addToCart.
+// addToCart. A su vez llama a la funcion addItemToCart y le pase los parametros precio e imagenSrc. y luego llama a la funcion actualizarTotalCarrito.
 
 function addToCartClicked(event) {
     let boton = event.target
@@ -87,14 +91,13 @@ function addToCartClicked(event) {
 
 }
 
-
+// Esta funcion es la encargada de agregar el item al carrito. La misma crea un div y lo anida dentro de otro div ya existente.
 
 function addItemToCart(precio, imagenSrc) {
     let contenedorProductoCarrito = document.createElement('div');
-    let contenedorLibros = document.getElementsByClassName("contenedor-libros")[0]
-    let productosCarrito = document.getElementsByClassName
-    ("producto-carrito")[0];
-    productosCarrito.classList.add('producto-carrito')
+    let contenedorLibros = document.getElementById('contenedor')
+    let productosCarrito = document.getElementsByClassName("producto-carrito")[0];
+    // ----------aca estaba el add to class list ----------- // 
     let productosCarritoContenido = `
     <div class="producto-carrito">
         <img src="${imagenSrc}" alt="">
@@ -103,7 +106,15 @@ function addItemToCart(precio, imagenSrc) {
         <button class="btn btn-danger delete">Delete</button>
     </div>`
     contenedorProductoCarrito.innerHTML = productosCarritoContenido
+    
+
+    
+
+
     contenedorLibros.append(contenedorProductoCarrito)
+    productosCarrito.classList.add('producto-carrito')
+    
+    
     contenedorProductoCarrito.getElementsByClassName('delete')[0].addEventListener('click', function(event){
         let botonDeleteApretado = event.target
         botonDeleteApretado.parentElement.remove()
