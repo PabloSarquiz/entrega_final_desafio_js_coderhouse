@@ -101,9 +101,16 @@ baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999, "./ASS
 
 } else {
     let sessionStorageBaseDatos = JSON.parse(sessionStorage.baseDatos);
+    
+    for ( let i = 0; i<sessionStorageBaseDatos.length ; i++){
+        sessionStorageBaseDatos[i] = new Libro(sessionStorageBaseDatos[i].id, sessionStorageBaseDatos[i].autor, sessionStorageBaseDatos[i].titulo, sessionStorageBaseDatos[i].año, sessionStorageBaseDatos[i].editorial, sessionStorageBaseDatos[i].stock, sessionStorageBaseDatos[i].precio, sessionStorageBaseDatos[i].src, sessionStorageBaseDatos[i].cantidad)
+        console.log(sessionStorageBaseDatos)
+        
+    }
+
     baseDatos = sessionStorageBaseDatos;
 
-}
+} 
 
 // ----------------------------- COMIENZO DEL CODIGO --------------------------------------------
 
