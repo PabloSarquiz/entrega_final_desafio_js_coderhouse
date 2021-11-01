@@ -21,6 +21,7 @@ class Carrito {
             if (this.items[libro.titulo] == undefined) {
                 this.items[libro.titulo] = libro;
                 this.items.push(libro)
+                agregarDOM(libro)
             }
             this.items[libro.titulo].cantidad++;
 
@@ -136,13 +137,13 @@ for (let i = 0; i < baseDatos.length; i++) {
     libros[i].children[2].textContent = `$${baseDatos[i].precio}`
     libros[i].children[3].addEventListener("click", () => {
         nuevoLibro = document.createElement('div')
-
-
         comprar(baseDatos[i]);
     });
 };
 
 //  Este Lopp agrega event listeners a todos los botones delete ---------------------------------------------------
+
+
 for (let i = 0; i < botonesDelete.length; i++) {
     let botonDelete = botonesDelete[i]
     botonDelete.addEventListener('click', function (event) {
@@ -169,6 +170,27 @@ function comprar(libro) {
     carro.addLibro(libro);
     console.log(carro);
 
+   
+   
+}
+
+function agregarDOM(libro){
+    let nuevoDiv = document.createElement('div')
+    agregarProductoACarro = `
+
+ <img src="${libro.src}" alt="">
+ <input class="cantidad" type="number" value="1">
+ <p class="precio">$${libro.precio}</p>
+ <button class="btn btn-danger delete">Delete</button>
+
+ `
+ 
+ nuevoDiv.innerHTML = agregarProductoACarro
+ nuevoDiv.classList.add('producto-carrito')
+ console.log(nuevoDiv)
+
+ contenedor.appendChild(nuevoDiv)
+
 }
 
 function actualizar() {
@@ -179,6 +201,8 @@ function actualizar() {
 
     sessionStorage.setItem("baseDatos", baseDatos);
     sessionStorage.baseDatos = JSON.stringify(baseDatos);
+
+    
 }
 
 
