@@ -141,16 +141,16 @@ for (let i = 0; i < baseDatos.length; i++) {
     });
 };
 
-//  Este Lopp agrega event listeners a todos los botones delete ---------------------------------------------------
+// //  Este Lopp agrega event listeners a todos los botones delete ---------------------------------------------------
 
 
-for (let i = 0; i < botonesDelete.length; i++) {
-    let botonDelete = botonesDelete[i]
-    botonDelete.addEventListener('click', function (event) {
-        let botonDeleteApretado = event.target
-        botonDeleteApretado.parentElement.remove()
-    })
-};
+// for (let i = 0; i < botonesDelete.length; i++) {
+//     let botonDelete = botonesDelete[i]
+//     botonDelete.addEventListener('click', function (event) {
+//         let botonDeleteApretado = event.target
+//         botonDeleteApretado.parentElement.remove()
+//     })
+// };
 
 
 //Aca agrego un eventListener al boton comprar. -----------------------------------------------------------------
@@ -187,11 +187,20 @@ function agregarDOM(libro){
  
  nuevoDiv.innerHTML = agregarProductoACarro
  nuevoDiv.classList.add('producto-carrito')
- console.log(nuevoDiv)
-
+ 
  contenedor.appendChild(nuevoDiv)
 
+ nuevoDiv.getElementsByClassName('delete')[0].addEventListener('click', function(event){
+    let botonDeleteApretado = event.target
+    botonDeleteApretado.parentElement.remove()
+    actualizar()
+
+ })
+
+
 }
+
+
 
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
