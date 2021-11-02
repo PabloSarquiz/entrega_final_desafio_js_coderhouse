@@ -17,25 +17,36 @@ class Carrito {
             this.total = total
     }
 
+    getIndex(libro) {
+        let index = this.items.indexOf(libro)
+        return index
+    }
+
     addLibro(libro) {
         if (libro.getStock()) {
             if (this.items[libro.titulo] == undefined) {
-                this.items[libro.titulo] = libro;
-                this.items.push(libro)
-                agregarDOM(libro)
-            }
-            this.items[libro.titulo].cantidad++;
+                // this.items[libro.titulo] = libro;
+                let libroCarrito = libro
+                libroCarrito.cantidad = 0;
+                this.items.push(libroCarrito)
 
-        } else
+                agregarDOM(libro)
+
+            }
+            console.log(libro)
+            this.items[this.getIndex(libro)].cantidad++;
+            
+        } else {
             alert("No quedan más copias de " + libro.titulo);
+            
+        }
+        
         actualizar()
+        
     }
 
     removeLibro(libro) {
-        this.items[libro.titulo] = libro
-        libro.cantidad = 0
-        let index = this.items.indexOf(libro)
-        this.items.splice(index, 1);
+        this.items.splice(this.getIndex(libro), 1);
         actualizar();
     }
 
@@ -64,16 +75,15 @@ class Carrito {
 
 // Clase Libro con su constructor -------------------------------------------------------------------------
 class Libro {
-    constructor(id, autor, titulo, año, editorial, stock, precio, src, cantidad = 0) {
+    constructor(id, autor, titulo, año, editorial, stock, precio, src) {
         this.id = id
         this.autor = autor,
-            this.titulo = titulo,
-            this.año = año,
-            this.editorial = editorial,
-            this.stock = stock
+        this.titulo = titulo,
+        this.año = año,
+        this.editorial = editorial,
+        this.stock = stock
         this.precio = precio
         this.src = src
-        this.cantidad = cantidad
     }
 
     getStock() {
@@ -108,7 +118,7 @@ if (sessionStorage.baseDatos == undefined) {
     let sessionStorageBaseDatos = JSON.parse(sessionStorage.baseDatos);
 
     for (let i = 0; i < sessionStorageBaseDatos.length; i++) {
-        sessionStorageBaseDatos[i] = new Libro(sessionStorageBaseDatos[i].id, sessionStorageBaseDatos[i].autor, sessionStorageBaseDatos[i].titulo, sessionStorageBaseDatos[i].año, sessionStorageBaseDatos[i].editorial, sessionStorageBaseDatos[i].stock, sessionStorageBaseDatos[i].precio, sessionStorageBaseDatos[i].src, sessionStorageBaseDatos[i].cantidad)
+        sessionStorageBaseDatos[i] = new Libro(sessionStorageBaseDatos[i].id, sessionStorageBaseDatos[i].autor, sessionStorageBaseDatos[i].titulo, sessionStorageBaseDatos[i].año, sessionStorageBaseDatos[i].editorial, sessionStorageBaseDatos[i].stock, sessionStorageBaseDatos[i].precio, sessionStorageBaseDatos[i].src)
         console.log(sessionStorageBaseDatos)
 
     }
