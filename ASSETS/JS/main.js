@@ -5,7 +5,8 @@ let botonesDelete = document.querySelectorAll(".delete");
 let botonComprar = document.getElementById("buy");
 let botonClear = document.getElementById("clear");
 let total = document.getElementById('total');
-let contenedor = document.getElementById('contenedor')
+let contenedor = document.getElementById('contenedor');
+let cant = document.getElementsByClassName('cantidad');
 
 // -------------------------------- Declaracion de CLASES.-----------------------------------------------
 // Clase Carrito con su constructor.---------------------------------------------------------------------
@@ -30,6 +31,14 @@ class Carrito {
         actualizar()
     }
 
+    removeLibro(libro) {
+        this.items[libro.titulo] = libro
+        libro.cantidad = 0
+        let index = this.items.indexOf(libro)
+        this.items.splice(index, 1);
+        actualizar();
+    }
+
 
 
     precioTotal() {
@@ -39,23 +48,18 @@ class Carrito {
         this.items.forEach(libro => {
 
             totalCarrito += libro.precio * libro.cantidad;
-          
-            
+
+
         });
         this.total = totalCarrito
 
         return totalCarrito
     }
 
-    removeLibro(libro){
-        if (this.items[libro.cantidad] > 1){
-            console.log('hay mas de 1') 
 
-        }
-    }
-    
 
 }
+
 
 
 // Clase Libro con su constructor -------------------------------------------------------------------------
@@ -91,27 +95,27 @@ if (sessionStorage.baseDatos == undefined) {
 
     baseDatos = []
 
-baseDatos.push(new Libro(1, "KING", "CARRIE", 1974, "DEBOLSILLO", 4, 999, "./ASSETS/Carrie-1981 (1).png"));
-baseDatos.push(new Libro(2, "KING", "CUJO", 1976, "DEBOLSILLO", 9, 899, "./ASSETS/Cujo.jpg"));
-baseDatos.push(new Libro(3, "KING", "SALEM'S LOT", 1988, "DEBOLSILLO", 8, 1100, "./ASSETS/salems lot.jpg"));
-baseDatos.push(new Libro(4, "KING", "IT", 1986, "DEBOLSILLO", 10, 1899, "./ASSETS/It-First-Edition.jpg"));
-baseDatos.push(new Libro(5, "KING", "PET SAMATARY", 1999, "SALAMANDRA", 5, 999, "./ASSETS/pet.jpg"));
-baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 1499, "./ASSETS/the stand.jpg"));
-baseDatos.push(new Libro(7, "KING", "THE SHINNING", 1984, "DEBOLSILLO", 0, 1299, "./ASSETS/elResplandor.jpg"));
-baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999, "./ASSETS/missery.jpg"));
+    baseDatos.push(new Libro(1, "KING", "CARRIE", 1974, "DEBOLSILLO", 4, 999, "./ASSETS/Carrie-1981 (1).png"));
+    baseDatos.push(new Libro(2, "KING", "CUJO", 1976, "DEBOLSILLO", 9, 899, "./ASSETS/Cujo.jpg"));
+    baseDatos.push(new Libro(3, "KING", "SALEM'S LOT", 1988, "DEBOLSILLO", 8, 1100, "./ASSETS/salems lot.jpg"));
+    baseDatos.push(new Libro(4, "KING", "IT", 1986, "DEBOLSILLO", 10, 1899, "./ASSETS/It-First-Edition.jpg"));
+    baseDatos.push(new Libro(5, "KING", "PET SAMATARY", 1999, "SALAMANDRA", 5, 999, "./ASSETS/pet.jpg"));
+    baseDatos.push(new Libro(6, "KING", "THE STAND", 1974, "SALAMANDRA", 3, 1499, "./ASSETS/the stand.jpg"));
+    baseDatos.push(new Libro(7, "KING", "THE SHINNING", 1984, "DEBOLSILLO", 0, 1299, "./ASSETS/elResplandor.jpg"));
+    baseDatos.push(new Libro(8, "KING", "MISERY", 1984, "DEBOLSILLO", 3, 999, "./ASSETS/missery.jpg"));
 
 } else {
     let sessionStorageBaseDatos = JSON.parse(sessionStorage.baseDatos);
-    
-    for ( let i = 0; i<sessionStorageBaseDatos.length ; i++){
+
+    for (let i = 0; i < sessionStorageBaseDatos.length; i++) {
         sessionStorageBaseDatos[i] = new Libro(sessionStorageBaseDatos[i].id, sessionStorageBaseDatos[i].autor, sessionStorageBaseDatos[i].titulo, sessionStorageBaseDatos[i].año, sessionStorageBaseDatos[i].editorial, sessionStorageBaseDatos[i].stock, sessionStorageBaseDatos[i].precio, sessionStorageBaseDatos[i].src, sessionStorageBaseDatos[i].cantidad)
         console.log(sessionStorageBaseDatos)
-        
+
     }
 
     baseDatos = sessionStorageBaseDatos;
 
-} 
+}
 
 // ----------------------------- COMIENZO DEL CODIGO --------------------------------------------
 
@@ -125,7 +129,7 @@ if (sessionStorage.carro == undefined) {
     let sessionStorageCarro = JSON.parse(sessionStorage.carro);
     carro = new Carrito(sessionStorageCarro.name, sessionStorageCarro.items, sessionStorageCarro.total);
     actualizar();
-    
+
 }
 
 
@@ -141,17 +145,6 @@ for (let i = 0; i < baseDatos.length; i++) {
     });
 };
 
-// //  Este Lopp agrega event listeners a todos los botones delete ---------------------------------------------------
-
-
-// for (let i = 0; i < botonesDelete.length; i++) {
-//     let botonDelete = botonesDelete[i]
-//     botonDelete.addEventListener('click', function (event) {
-//         let botonDeleteApretado = event.target
-//         botonDeleteApretado.parentElement.remove()
-//     })
-// };
-
 
 //Aca agrego un eventListener al boton comprar. -----------------------------------------------------------------
 botonComprar.addEventListener('click', function () {
@@ -163,18 +156,21 @@ botonClear.addEventListener('click', function () {
 })
 
 
-
 // FUNCIONES 
 
 function comprar(libro) {
     carro.addLibro(libro);
-    console.log(carro);
 
-   
-   
+
 }
 
-function agregarDOM(libro){
+function eliminar(libro) {
+    carro.removeLibro(libro)
+}
+
+
+
+function agregarDOM(libro) {
     let nuevoDiv = document.createElement('div')
     agregarProductoACarro = `
 
@@ -184,34 +180,33 @@ function agregarDOM(libro){
  <button class="btn btn-danger delete">Delete</button>
 
  `
- 
- nuevoDiv.innerHTML = agregarProductoACarro
- nuevoDiv.classList.add('producto-carrito')
- 
- contenedor.appendChild(nuevoDiv)
 
- nuevoDiv.getElementsByClassName('delete')[0].addEventListener('click', function(event){
-    let botonDeleteApretado = event.target
-    botonDeleteApretado.parentElement.remove()
-    actualizar()
+    nuevoDiv.innerHTML = agregarProductoACarro
+    nuevoDiv.classList.add('producto-carrito')
 
- })
+    contenedor.appendChild(nuevoDiv)
+
+    nuevoDiv.getElementsByClassName('delete')[0].addEventListener('click', function (event) {
+        let botonDeleteApretado = event.target
+        botonDeleteApretado.parentElement.remove()
+        eliminar(libro)
+    })
 
 
 }
 
-
-
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
-    
+
     sessionStorage.setItem("carro", carro);
     sessionStorage.carro = JSON.stringify(carro);
 
     sessionStorage.setItem("baseDatos", baseDatos);
     sessionStorage.baseDatos = JSON.stringify(baseDatos);
 
-    
+    console.log(carro);
+
+
 }
 
 
