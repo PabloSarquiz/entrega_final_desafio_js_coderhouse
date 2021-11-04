@@ -6,7 +6,8 @@ let botonComprar = document.getElementById("buy");
 let botonClear = document.getElementById("clear");
 let total = document.getElementById('total');
 let contenedor = document.getElementById('contenedor');
-let cant = document.getElementsByClassName('cantidad');
+
+
 
 // -------------------------------- Declaracion de CLASES.-----------------------------------------------
 // Clase Carrito con su constructor.---------------------------------------------------------------------
@@ -23,26 +24,39 @@ class Carrito {
     }
 
     addLibro(libro) {
+
+
         if (libro.getStock()) {
-            if (this.items[libro.titulo] == undefined) {
-                // this.items[libro.titulo] = libro;
-                let libroCarrito = libro
-                libroCarrito.cantidad = 0;
+            if (!this.items.some(e => e.titulo === libro.titulo)) {
+
+                let libroCarrito = Object.assign({}, libro)
+                libroCarrito.cantidad = 1;
                 this.items.push(libroCarrito)
 
-                agregarDOM(libro)
+                agregarDOM(libroCarrito)
 
+            } else if (this.items.some(e => e.titulo === libro.titulo)) {
+                let libroCarrito = this.items.find(obj => {
+                     return obj.titulo === libro.titulo
+                     
+                    
+                  })
+
+                  libroCarrito.cantidad++
+                  
+                  
             }
-            console.log(libro)
-            this.items[this.getIndex(libro)].cantidad++;
-            
+
+           
+
+
         } else {
             alert("No quedan más copias de " + libro.titulo);
-            
+
         }
-        
+
         actualizar()
-        
+
     }
 
     removeLibro(libro) {
@@ -67,6 +81,16 @@ class Carrito {
         return totalCarrito
     }
 
+    clearCarrito(){
+        this.items = []
+      
+        contenedor.innerHTML = ""
+       
+        actualizar()
+       return this.items
+       
+    }
+
 
 
 }
@@ -77,10 +101,10 @@ class Carrito {
 class Libro {
     constructor(id, autor, titulo, año, editorial, stock, precio, src) {
         this.id = id
-        this.autor = autor,
-        this.titulo = titulo,
-        this.año = año,
-        this.editorial = editorial,
+        this.autor = autor
+        this.titulo = titulo
+        this.año = año
+        this.editorial = editorial
         this.stock = stock
         this.precio = precio
         this.src = src
@@ -162,7 +186,7 @@ botonComprar.addEventListener('click', function () {
 });
 
 botonClear.addEventListener('click', function () {
-    console.log("click")
+    carro.clearCarrito()
 })
 
 
@@ -180,13 +204,13 @@ function eliminar(libro) {
 
 
 
-function agregarDOM(libro) {
+function agregarDOM(libroCarrito) {
     let nuevoDiv = document.createElement('div')
     agregarProductoACarro = `
 
- <img src="${libro.src}" alt="">
- <input class="cantidad" type="number" value="1">
- <p class="precio">$${libro.precio}</p>
+ <img src="${libroCarrito.src}" alt="">
+ <input class="cantidad" type="number" value="${libroCarrito.cantidad}">
+ <p class="precio">$${libroCarrito.precio}</p>
  <button class="btn btn-danger delete">Delete</button>
 
  `
@@ -199,7 +223,7 @@ function agregarDOM(libro) {
     nuevoDiv.getElementsByClassName('delete')[0].addEventListener('click', function (event) {
         let botonDeleteApretado = event.target
         botonDeleteApretado.parentElement.remove()
-        eliminar(libro)
+        eliminar(libroCarrito)
     })
 
 
@@ -208,10 +232,10 @@ function agregarDOM(libro) {
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
 
-    sessionStorage.setItem("carro", carro);
+
     sessionStorage.carro = JSON.stringify(carro);
 
-    sessionStorage.setItem("baseDatos", baseDatos);
+
     sessionStorage.baseDatos = JSON.stringify(baseDatos);
 
     console.log(carro);
