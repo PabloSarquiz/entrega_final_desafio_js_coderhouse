@@ -6,13 +6,15 @@ let botonComprar = document.getElementById("buy");
 let botonClear = document.getElementById("clear");
 let total = document.getElementById('total');
 let contenedor = document.getElementById('contenedor');
+let cant = document.getElementsByClassName('cantidad')
 
 
 
 // -------------------------------- Declaracion de CLASES.-----------------------------------------------
 // Clase Carrito con su constructor.---------------------------------------------------------------------
 class Carrito {
-    constructor(name = "Usuario", items = [], total = 0) {
+    constructor(name = "Usuario", items = [], total 
+    = 0) {
         this.name = name,
             this.items = items,
             this.total = total
@@ -37,18 +39,14 @@ class Carrito {
 
             } else if (this.items.some(e => e.titulo === libro.titulo)) {
                 let libroCarrito = this.items.find(obj => {
-                     return obj.titulo === libro.titulo
-                     
-                    
-                  })
+                    return obj.titulo === libro.titulo
 
-                  libroCarrito.cantidad++
-                  
-                  
+
+                })
+
+                libroCarrito.cantidad++
+                cant.value = libroCarrito.cantidad;
             }
-
-           
-
 
         } else {
             alert("No quedan más copias de " + libro.titulo);
@@ -81,14 +79,14 @@ class Carrito {
         return totalCarrito
     }
 
-    clearCarrito(){
+    clearCarrito() {
         this.items = []
-      
+
         contenedor.innerHTML = ""
-       
+
         actualizar()
-       return this.items
-       
+        return this.items
+
     }
 
 
@@ -209,7 +207,9 @@ function agregarDOM(libroCarrito) {
     agregarProductoACarro = `
 
  <img src="${libroCarrito.src}" alt="">
- <input class="cantidad" type="number" value="${libroCarrito.cantidad}">
+ <button id="less"><</button>
+ <p id="quantity">1</p>
+ <button id="more">></button>
  <p class="precio">$${libroCarrito.precio}</p>
  <button class="btn btn-danger delete">Delete</button>
 
