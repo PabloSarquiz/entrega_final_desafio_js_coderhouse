@@ -90,6 +90,12 @@ class Carrito {
 
     }
 
+    buyLibros(){
+        alert ("Gracias por su compra")
+        this.items = []
+
+    }
+
 
 
 }
@@ -180,7 +186,7 @@ for (let i = 0; i < baseDatos.length; i++) {
 
 //Aca agrego un eventListener al boton comprar. -----------------------------------------------------------------
 botonComprar.addEventListener('click', function () {
-    console.log("Compra");
+    carro.buyLibros()
 });
 
 botonClear.addEventListener('click', function () {
@@ -208,7 +214,7 @@ function agregarDOM(libroCarrito) {
 
  <img src="${libroCarrito.src}" alt="">
  <button class=" less btn btn-info"><</button>
- <p id="quantity">x${libroCarrito.cantidad}</p>
+ <p class="quantity">x${libroCarrito.cantidad}</p>
  <button class=" more btn btn-info">></button>
  <p class="precio">$${libroCarrito.precio}</p>
  <button class="btn btn-danger delete">Delete</button>
@@ -221,13 +227,18 @@ function agregarDOM(libroCarrito) {
     contenedor.appendChild(nuevoDiv)
 
     nuevoDiv.getElementsByClassName('less')[0].addEventListener('click', function (event) {
-        event.target
+        
 
         if (libroCarrito.cantidad > 1) {
             libroCarrito.cantidad--
             libroCarrito.stock++
+            
+           
+
             actualizar()
         } else return
+
+
 
     })
 
@@ -250,7 +261,7 @@ function agregarDOM(libroCarrito) {
         eliminar(libroCarrito)
     })
 
-
+    nuevoDiv.getElementsByClassName('quantity')[0].innerText = `X${libroCarrito.cantidad}`
 
 
 
@@ -286,8 +297,7 @@ function agregarDOM(libroCarrito) {
 
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
-    
-
+    let = document.getElementsByClassName('quantity')[0];
 
     sessionStorage.carro = JSON.stringify(carro);
 
