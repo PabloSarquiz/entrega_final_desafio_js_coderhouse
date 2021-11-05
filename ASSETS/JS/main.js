@@ -1,10 +1,13 @@
 
+
+
 // -------------------- Selectores del DOM  ------------------------------------------------------------
 let libros = document.querySelectorAll(".libro");
 let botonesDelete = document.querySelectorAll(".delete");
 let botonComprar = document.getElementById("buy");
 let botonClear = document.getElementById("clear");
 let total = document.getElementById('total');
+// let quantity = document.getElementsByClassName('quantity')[0];
 let contenedor = document.getElementById('contenedor');
 let cant = document.getElementsByClassName('cantidad')
 
@@ -13,8 +16,8 @@ let cant = document.getElementsByClassName('cantidad')
 // -------------------------------- Declaracion de CLASES.-----------------------------------------------
 // Clase Carrito con su constructor.---------------------------------------------------------------------
 class Carrito {
-    constructor(name = "Usuario", items = [], total 
-    = 0) {
+    constructor(name = "Usuario", items = [], total
+        = 0) {
         this.name = name,
             this.items = items,
             this.total = total
@@ -33,20 +36,18 @@ class Carrito {
 
                 let libroCarrito = Object.assign({}, libro)
                 libroCarrito.cantidad = 1;
+                libroCarrito.stock--
                 this.items.push(libroCarrito)
 
                 agregarDOM(libroCarrito)
 
             } else if (this.items.some(e => e.titulo === libro.titulo)) {
-                let libroCarrito = this.items.find(obj => {
-                    return obj.titulo === libro.titulo
+                return
 
 
-                })
-
-                libroCarrito.cantidad++
-                cant.value = libroCarrito.cantidad;
             }
+
+
 
         } else {
             alert("No quedan más copias de " + libro.titulo);
@@ -68,9 +69,9 @@ class Carrito {
 
         let totalCarrito = 0;
 
-        this.items.forEach(libro => {
+        this.items.forEach(libroCarrito => {
 
-            totalCarrito += libro.precio * libro.cantidad;
+            totalCarrito += libroCarrito.precio * libroCarrito.cantidad;
 
 
         });
@@ -110,7 +111,6 @@ class Libro {
 
     getStock() {
         if (this.stock > 0) {
-            this.stock--;
             return true;
         } else {
             return false;
@@ -207,9 +207,9 @@ function agregarDOM(libroCarrito) {
     agregarProductoACarro = `
 
  <img src="${libroCarrito.src}" alt="">
- <button id="less"><</button>
- <p id="quantity">1</p>
- <button id="more">></button>
+ <button class=" less btn btn-info"><</button>
+ <p id="quantity">x${libroCarrito.cantidad}</p>
+ <button class=" more btn btn-info">></button>
  <p class="precio">$${libroCarrito.precio}</p>
  <button class="btn btn-danger delete">Delete</button>
 
@@ -220,6 +220,30 @@ function agregarDOM(libroCarrito) {
 
     contenedor.appendChild(nuevoDiv)
 
+    nuevoDiv.getElementsByClassName('less')[0].addEventListener('click', function (event) {
+        event.target
+
+        if (libroCarrito.cantidad > 1) {
+            libroCarrito.cantidad--
+            libroCarrito.stock++
+            actualizar()
+        } else return
+
+    })
+
+
+    nuevoDiv.getElementsByClassName('more')[0].addEventListener('click', function (event) {
+        event.target
+        if (libroCarrito.stock > 0) {
+            libroCarrito.cantidad++
+            libroCarrito.stock--
+            actualizar()
+        } else alert("No hay mas stock");
+
+
+    })
+
+
     nuevoDiv.getElementsByClassName('delete')[0].addEventListener('click', function (event) {
         let botonDeleteApretado = event.target
         botonDeleteApretado.parentElement.remove()
@@ -227,10 +251,42 @@ function agregarDOM(libroCarrito) {
     })
 
 
+
+
+
+
+    // $(document).ready(function () {
+
+
+
+
+    //     $(".less").click(function (event) {
+    //         event.target
+    //         libroCarrito.cantidad-- 
+    //         libroCarrito.stock++
+    //         actualizar()
+
+    //     })
+
+
+    //     $(".more").click(function (event) {
+    //         event.target
+    //         console.log("click")
+    //         libroCarrito.cantidad++
+    //         libroCarrito.stock--
+    //         actualizar()
+
+
+    //     })
+
+    // })
+
+
 }
 
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
+    
 
 
     sessionStorage.carro = JSON.stringify(carro);
@@ -242,6 +298,5 @@ function actualizar() {
 
 
 }
-
 
 
