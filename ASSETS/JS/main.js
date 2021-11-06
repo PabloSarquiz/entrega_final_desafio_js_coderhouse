@@ -234,7 +234,8 @@ function agregarDOM(libroCarrito) {
             libroCarrito.stock++
             
            
-
+            nuevoDiv.querySelector(".quantity").textContent = `x ${libroCarrito.cantidad}`
+            nuevoDiv.querySelector(".precio").textContent = `x ${libroCarrito.cantidad * libroCarrito.precio}`
             actualizar()
         } else return
 
@@ -248,6 +249,9 @@ function agregarDOM(libroCarrito) {
         if (libroCarrito.stock > 0) {
             libroCarrito.cantidad++
             libroCarrito.stock--
+
+            nuevoDiv.querySelector(".quantity").textContent = `x ${libroCarrito.cantidad}`
+            nuevoDiv.querySelector(".precio").textContent = `x ${libroCarrito.cantidad * libroCarrito.precio}`
             actualizar()
         } else alert("No hay mas stock");
 
