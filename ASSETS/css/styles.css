@@ -33,7 +33,7 @@ p {
 
 
 .contenedor{
-    background: url("../halloween.jpg") no-repeat;
+    background: url("../imgs/halloween.jpg") no-repeat;
     background-size: 100%s;
     display: grid;
     grid:
