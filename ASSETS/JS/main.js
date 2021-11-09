@@ -1,6 +1,5 @@
 
 
-
 // -------------------- Selectores del DOM  ------------------------------------------------------------
 let libros = document.querySelectorAll(".libro");
 let botonesDelete = document.querySelectorAll(".delete");
@@ -13,96 +12,9 @@ let cant = document.getElementsByClassName('cantidad')
 
 
 
-// -------------------------------- Declaracion de CLASES.-----------------------------------------------
-// Clase Carrito con su constructor.---------------------------------------------------------------------
-class Carrito {
-    constructor(name = "Usuario", items = [], total
-        = 0) {
-        this.name = name,
-            this.items = items,
-            this.total = total
-    }
-
-    getIndex(libro) {
-        let index = this.items.indexOf(libro)
-        return index
-    }
-
-    addLibro(libro) {
-
-
-        if (libro.getStock()) {
-            if (!this.items.some(e => e.titulo === libro.titulo)) {
-
-                let libroCarrito = Object.assign({}, libro)
-                libroCarrito.cantidad = 1;
-                libroCarrito.stock--
-                this.items.push(libroCarrito)
-
-                agregarDOM(libroCarrito)
-
-            } else if (this.items.some(e => e.titulo === libro.titulo)) {
-                return
-
-
-            }
-
-
-
-        } else {
-            alert("No quedan más copias de " + libro.titulo);
-
-        }
-
-        actualizar()
-
-    }
-
-    removeLibro(libro) {
-        this.items.splice(this.getIndex(libro), 1);
-        actualizar();
-    }
-
-
-
-    precioTotal() {
-
-        let totalCarrito = 0;
-
-        this.items.forEach(libroCarrito => {
-
-            totalCarrito += libroCarrito.precio * libroCarrito.cantidad;
-
-
-        });
-        this.total = totalCarrito
-
-        return totalCarrito
-    }
-
-    clearCarrito() {
-        this.items = []
-
-        contenedor.innerHTML = ""
-
-        actualizar()
-        return this.items
-
-    }
-
-    buyLibros(){
-        alert ("Gracias por su compra")
-        this.items = []
-
-    }
-
-
-
-}
-
-
 
 // Clase Libro con su constructor -------------------------------------------------------------------------
+
 class Libro {
     constructor(id, autor, titulo, año, editorial, stock, precio, src) {
         this.id = id
@@ -178,7 +90,7 @@ for (let i = 0; i < baseDatos.length; i++) {
     libros[i].children[1].src = baseDatos[i].src
     libros[i].children[2].textContent = `$${baseDatos[i].precio}`
     libros[i].children[3].addEventListener("click", () => {
-        nuevoLibro = document.createElement('div')
+        let nuevoLibro = document.createElement('div')
         comprar(baseDatos[i]);
     });
 };
@@ -210,7 +122,7 @@ function eliminar(libro) {
 
 function agregarDOM(libroCarrito) {
     let nuevoDiv = document.createElement('div')
-    agregarProductoACarro = `
+    let agregarProductoACarro = `
 
  <img src="${libroCarrito.src}" alt="">
  <button class=" less btn btn-info"><</button>
@@ -270,38 +182,11 @@ function agregarDOM(libroCarrito) {
 
 
 
-    // $(document).ready(function () {
-
-
-
-
-    //     $(".less").click(function (event) {
-    //         event.target
-    //         libroCarrito.cantidad-- 
-    //         libroCarrito.stock++
-    //         actualizar()
-
-    //     })
-
-
-    //     $(".more").click(function (event) {
-    //         event.target
-    //         console.log("click")
-    //         libroCarrito.cantidad++
-    //         libroCarrito.stock--
-    //         actualizar()
-
-
-    //     })
-
-    // })
-
-
 }
 
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
-    let = document.getElementsByClassName('quantity')[0];
+    document.getElementsByClassName('quantity')[0];
 
     sessionStorage.carro = JSON.stringify(carro);
 
@@ -312,5 +197,6 @@ function actualizar() {
 
 
 }
+
 
 
