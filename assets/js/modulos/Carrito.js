@@ -75,6 +75,9 @@ class Carrito {
     buyLibros() {
         alert("Gracias por su compra")
         this.items = []
+        contenedor.innerHTML = ""
+        actualizar()
+        return this.items
 
     }
 

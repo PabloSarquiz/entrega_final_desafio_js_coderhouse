@@ -36,22 +36,17 @@ for (let i = 0; i < baseDatos.length; i++) {
 };
 
 
-//Aca agrego un eventListener al boton comprar. -----------------------------------------------------------------
-botonComprar.addEventListener('click', function () {
-    carro.buyLibros()
-});
+// Selecciono el boton Buy y le agrego el evento click con jquery
+$('#buy').click( function(){carro.buyLibros()})
 
-botonClear.addEventListener('click', function () {
-    carro.clearCarrito()
-})
+// Selecciono el boton clear y le agrego el evento click con jquery.
+$('#clear').click( function(){carro.clearCarrito()})
 
 
 // FUNCIONES 
 
 function comprar(libro) {
     carro.addLibro(libro);
-
-
 }
 
 function eliminar(libro) {
