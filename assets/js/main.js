@@ -1,10 +1,11 @@
+const url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
+
 // -------------------- Selectores del DOM  ------------------------------------------------------------
 let libros = document.querySelectorAll(".libro");
 let botonesDelete = document.querySelectorAll(".delete");
 let botonComprar = document.getElementById("buy");
 let botonClear = document.getElementById("clear");
 let total = document.getElementById('total');
-// let quantity = document.getElementsByClassName('quantity')[0];
 let contenedor = document.getElementById('contenedor');
 let cant = document.getElementsByClassName('cantidad')
 
@@ -33,6 +34,7 @@ for (let i = 0; i < baseDatos.length; i++) {
         let nuevoLibro = document.createElement('div')
         comprar(baseDatos[i]);
     });
+
 };
 
 
@@ -132,6 +134,16 @@ function actualizar() {
 
 
 }
+
+
+
+$.get(url, function (res, status) {
+    if (status === "success") {
+        let valorDolar = parseFloat(res[1].casa.venta);
+        console.log(valorDolar)
+    }
+})
+
 
 
 

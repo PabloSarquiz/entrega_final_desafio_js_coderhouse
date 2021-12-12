@@ -73,6 +73,14 @@ class Carrito {
     }
 
     buyLibros() {
+        $.get(url, function (res, status) {
+            if (status === "success") {
+                let valorDolar = parseFloat(res[1].casa.venta);
+                alert(`Atencion el total de su compra en Dolares es de ${this.totalCarrito / valorDolar}`)
+            }
+        })
+        
+  
         alert("Gracias por su compra")
         this.items = []
         contenedor.innerHTML = ""
