@@ -1,8 +1,5 @@
 
-
-
 // Clase Libro con su constructor -------------------------------------------------------------------------
-
 class Libro {
     constructor(id, autor, titulo, año, editorial, stock, precio, src) {
         this.id = id
@@ -14,7 +11,6 @@ class Libro {
         this.precio = precio
         this.src = src
     }
-
     getStock() {
         if (this.stock > 0) {
             return true;

@@ -1,5 +1,4 @@
 const url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
-
 // -------------------- Selectores del DOM  ------------------------------------------------------------
 let libros = document.querySelectorAll(".libro");
 let botonesDelete = document.querySelectorAll(".delete");
@@ -8,11 +7,8 @@ let botonClear = document.getElementById("clear");
 let total = document.getElementById('total');
 let contenedor = document.getElementById('contenedor');
 let cant = document.getElementsByClassName('cantidad')
-
 // ----------------------------- COMIENZO DEL CODIGO --------------------------------------------
-
 let carro;
-
 /* Revisamos que no haya un carrito guardado en storage*/
 if (sessionStorage.carro == undefined) {
     carro = new Carrito;
@@ -20,12 +16,8 @@ if (sessionStorage.carro == undefined) {
     let sessionStorageCarro = JSON.parse(sessionStorage.carro);
     carro = new Carrito(sessionStorageCarro.name, sessionStorageCarro.items, sessionStorageCarro.total);
     actualizar();
-
 }
-
-
 // Este Loop itera por cada objeto dentro del array "baseDatos" y extrae los valores de las propiedades : titulo / src / precio. Luego asigna dichas propiedades a cada  selector con la clase .libro, siendo el primer hijo titulo, el segundo src y el tecero precio.
-
 for (let i = 0; i < baseDatos.length; i++) {
     libros[i].children[0].textContent = baseDatos[i].titulo
     libros[i].children[1].src = baseDatos[i].src
@@ -36,17 +28,11 @@ for (let i = 0; i < baseDatos.length; i++) {
     });
 
 };
-
-
 // Selecciono el boton Buy y le agrego el evento click con jquery
 $('#buy').click( function(){carro.buyLibros()})
-
 // Selecciono el boton clear y le agrego el evento click con jquery.
 $('#clear').click( function(){carro.clearCarrito()})
-
-
 // FUNCIONES 
-
 function comprar(libro) {
     carro.addLibro(libro);
 }
@@ -54,95 +40,57 @@ function comprar(libro) {
 function eliminar(libro) {
     carro.removeLibro(libro)
 }
-
-
-
 function agregarDOM(libroCarrito) {
     let nuevoDiv = document.createElement('div')
     let agregarProductoACarro = `
-
  <img src="${libroCarrito.src}" alt="">
  <button class=" less btn btn-info"><</button>
  <p class="quantity">x${libroCarrito.cantidad}</p>
  <button class=" more btn btn-info">></button>
  <p class="precio">$${libroCarrito.precio}</p>
  <button class="btn btn-danger delete">Delete</button>
-
  `
-
     nuevoDiv.innerHTML = agregarProductoACarro
     nuevoDiv.classList.add('producto-carrito')
-
     contenedor.appendChild(nuevoDiv)
-
     nuevoDiv.getElementsByClassName('less')[0].addEventListener('click', function (event) {
-        
-
         if (libroCarrito.cantidad > 1) {
             libroCarrito.cantidad--
             libroCarrito.stock++
-            
-           
             nuevoDiv.querySelector(".quantity").textContent = `x ${libroCarrito.cantidad}`
             nuevoDiv.querySelector(".precio").textContent = `x ${libroCarrito.cantidad * libroCarrito.precio}`
             actualizar()
         } else return
-
-
-
     })
-
 
     nuevoDiv.getElementsByClassName('more')[0].addEventListener('click', function (event) {
         event.target
         if (libroCarrito.stock > 0) {
             libroCarrito.cantidad++
             libroCarrito.stock--
-
             nuevoDiv.querySelector(".quantity").textContent = `x ${libroCarrito.cantidad}`
             nuevoDiv.querySelector(".precio").textContent = `x ${libroCarrito.cantidad * libroCarrito.precio}`
             actualizar()
         } else alert("No hay mas stock");
-
-
     })
-
-
     nuevoDiv.getElementsByClassName('delete')[0].addEventListener('click', function (event) {
         let botonDeleteApretado = event.target
         botonDeleteApretado.parentElement.remove()
         eliminar(libroCarrito)
     })
-
     nuevoDiv.getElementsByClassName('quantity')[0].innerText = `X${libroCarrito.cantidad}`
-
-
-
-
 }
 
 function actualizar() {
     total.innerText = `Total: $${carro.precioTotal()}`;
     document.getElementsByClassName('quantity')[0];
-
     sessionStorage.carro = JSON.stringify(carro);
-
-
     sessionStorage.baseDatos = JSON.stringify(baseDatos);
-
     console.log(carro);
-
-
 }
 
 
 
-$.get(url, function (res, status) {
-    if (status === "success") {
-        let valorDolar = parseFloat(res[1].casa.venta);
-        console.log(valorDolar)
-    }
-})
 
 
 
